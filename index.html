@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script>
+        function get(){
+            navigator.geolocation.getCurrentPosition( x => {
+                document.querySelector("#get").textContent = `緯度${x.coords.latitude}\n経度${x.coords.longitude}`;
+            });
+        }
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" click="get">
+    <div id="out"></div>
+</body>
+</html>
