@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script>
-        function get(){
+        function refreshInfo(){
             navigator.geolocation.getCurrentPosition( x => {
                 document.querySelector("#get").textContent = `緯度${x.coords.latitude}\n経度${x.coords.longitude}`;
             });
@@ -14,7 +14,7 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="button" click="get">
+    <input type="button" onclick="refreshInfo" value="情報更新">
     <div id="out"></div>
 </body>
 </html>
