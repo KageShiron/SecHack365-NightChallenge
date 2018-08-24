@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type='text/javascript' src='http://maps.google.com/maps/api/js?sensor=false'></script>
     <script>
+
         // https://tech-blog.s-yoshiki.com/2018/05/92/
         function hubeny(lat1, lng1, lat2, lng2) {
             function rad(deg) {
@@ -64,6 +65,7 @@
             //return fetch("http://35.200.12.139/")
             return [{"date":24,"time":18,"latitude":39.6,"longitude":131.1,"radius":70},{"date":24,"time":8,"latitude":38.6,"longitude":135.9,"radius":60}]
         }
+        const marks = [{title:"下馬ヶ浜海水浴場", latitude:33.6834993,longitude:130.2896945}, {title : "Malahide Beach", latitude:53.4515159, longitude:-6.1379144}, {title:"森戸海岸", latitude:35.2771032, longitude:139.5698998},{title:"川越水上公園", latitude:35.9123431, longitude:139.4483828},{title:"多摩川", latitude: 35.813765, longitude:139.145329}, {title:"未来創造塾 滞在棟1",latitude:35.3894859,longtitude:139.4282729},{title:"慶應義塾大学湘南藤沢キャンパスカッパ館",latitude:35.3895029,longtitude:139.4282729},{title:"聖ヶ丘教会",latitude:35.654378,longtitude:139.4282729},{title:"湘南慶育病院",latitude:35.3894859,longtitude:139.4282729}]
 
         async function currentPos(x) {
             // let lat = 33.8;
@@ -98,8 +100,9 @@
             var marker = new google.maps.Marker({
                 position: current,
                 map: myMap,
-                title: current
+                title: "現在地"
             });
+
 
             console.log(x.coords);
             //console.log(hubeny(x.coords.latitude, x.coords.longitude, lat, lng));
@@ -108,12 +111,24 @@
             {
                 ty = [{latitude : 33.68,longitude:130.30}]
             }
+            let flag = false;
             for( let t of ty){
                 //document.querySelector("#out").innerHTML = `緯度${x.coords.latitude}<br>経度${x.coords.longitude}`;
                 if ((hubeny(x.coords.latitude, x.coords.longitude, t.latitude,t.longitude) / 1000) < 90) {
                     document.querySelector("#out").innerHTML = "暴風圏です";
                     document.querySelector("#boufu").style="display:block;"
+                    flag = true;
+                    break;
                 }
+            }
+            if(!flag)
+            for( t of marks)
+            {
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(t.latitude, t.longitude),
+                    map: myMap,
+                    title: t.title
+                });
             }
         }
 
